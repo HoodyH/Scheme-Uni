@@ -1,0 +1,57 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname es2) (read-case-sensitive #t) (teachpacks ((lib "drawings.rkt" "installed-teachpacks"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "drawings.rkt" "installed-teachpacks")) #f)))
+;PROBLEMA 2
+
+; Per eseguire questo codice e' necessario utilizzare il TeachPack "drawings.ss"
+
+;   larger-tile
+;   smaller-tile
+
+; Puoi spostare e combinare le forme con le operazioni:
+
+;   (shift-down <forma> <passi>)
+;   (shift-right <forma> <passi>)
+;   (quarter-turn-right <forma>)
+;   (quarter-turn-left <forma>)
+;   (half-turn <forma>)
+;   (glue-tiles <forma> <forma>)
+
+; Quali altre figure si possono costruire?
+
+
+; Traslazione unitaria da utilizzare con il puzzle
+;(set-puzzle-shift-step!)
+
+
+;costruzione croce
+(define crosslargertile
+  (glue-tiles larger-tile (shift-down(shift-right (quarter-turn-right(quarter-turn-right larger-tile)) 1.6) 0.8) )
+)
+(define crosssecondsmallertile
+  (shift-right (shift-down (quarter-turn-right (quarter-turn-right smaller-tile)) 4) 1.6)
+)
+(define cross
+  (glue-tiles (glue-tiles crosslargertile (shift-right smaller-tile 1.6)) crosssecondsmallertile )
+)
+;end costruzione croce
+
+;costruzione quadrato
+(define squarelargertile
+  (glue-tiles (quarter-turn-right (quarter-turn-right larger-tile)) (shift-down(shift-right larger-tile 1.6) 0.8) )
+)
+
+(define squaresecondsmallertile
+  (glue-tiles squarelargertile (shift-down(shift-right smaller-tile 1.6) 4) )
+)
+
+(define square
+  (glue-tiles squaresecondsmallertile (shift-right (quarter-turn-right(quarter-turn-right smaller-tile)) 1.6) )
+)
+
+
+square
+cross
+
+
+
